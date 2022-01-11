@@ -1,0 +1,54 @@
+#coding=utf-8
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+import time
+
+
+driver = webdriver.Chrome(r'D:\chromedriver.exe')#叫做webDriver的实例对象
+driver.implicitly_wait(10)#等待时间
+
+#打开网站
+driver.get('https://kyfw.12306.cn/otn/leftTicket/init')
+
+btn = driver.find_element_by_id('qd_closeDefaultWarningWindowDialog_id')
+btn.click()
+
+
+fromEle = driver.find_element_by_id('fromStationText')
+
+#点击一下输入框，否则输不进去
+fromEle.click()
+
+fromEle.clear()
+fromEle.send_keys(u'南京南\n')
+
+toEle = driver.find_element_by_id('toStationText')
+
+toEle.click()
+toEle.clear()
+toEle.send_keys(u'杭州东\n')
+
+#输入开始时间
+timeSelect = Select(driver.find_element_by_id('cc_start_time'))
+timeSelect.select_by_visible_text('00:00--24:00')
+
+tomorrow = driver.find_element_by_css_selector('#data_range li:nth-chid(2)')
+
+
+print(tomorrow)
+
+
+
+
+# 点击搜索车次
+# tomorrow.click()
+
+# print('\n\n\n==============================\n\n\n')
+# xpath = '//*[@id="queryLeftTable"]//td[4][@class]/../td[1]//a'
+#
+# theTrains = driver.find_elements_by_xpath(xpath)
+# for one in theTrains:
+#     print(one.text)
+#
+#
+driver.quit()
