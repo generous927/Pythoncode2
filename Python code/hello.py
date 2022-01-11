@@ -2575,8 +2575,44 @@ def 外部函数（）：
 ''''
  加入购物车，付款，修改收货地址......
  判断用户的登录状态
+ 
+ 
+特点：
+1.函数A是作为参数出现的（函数B就接收函数A作为参数）
+2.要有闭包的特点
 
 '''
+
+#定义一个装饰器
+def decorate(func):
+    a = 100
+    print('wrapper外层打印测试')
+
+    def wrapper():
+        func()
+        print('------->硬装')
+        # func()
+        print('-------->软装',a)
+
+    print('wrapper加载完成....')
+    return wrapper
+
+# 使用装饰器
+@decorate
+def house():
+    print("我是毛坯房。。。。")
+
+# 调用函数house
+# house()
+
+
+
+
+
+
+
+
+
 
 #
 # def func(number):
@@ -2607,20 +2643,22 @@ def 外部函数（）：
 # a = 10  # 声明整型变量
 # b = a
 
-def test():  # 声明函数
-    print('-----test------')
-
-t = test
-# test()
-# t()
-# print(t,test)
-
-def func(t):
-    print(t)
-    t()
-    print('----------->func')
-
-func(test)
+# def test():  # 声明函数
+#     print('-----test------')
+#
+# t = test
+# # test()
+# # t()
+# # print(t,test)
+#
+# def func(f):
+#     print(f)
+#     f()
+#     print('----------->func')
+#
+#
+# #调用
+# func(test)
 
 
 
