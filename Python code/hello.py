@@ -1699,6 +1699,76 @@
 # s1.discard('道明寺')
 # print(s1)
 
+
+#
+# def func(number):
+#     a = 100
+#
+#     def inner_func():
+#         nonlocal a
+#         nonlocal number
+#         number += 1
+#         for i in range(number):
+#             a += 1
+#
+#
+#         print('修改后的a：',a)
+#     return inner_func
+#
+# # 调用
+# x = func(5)
+# x()
+#
+# # 函数作为参数
+# a = 50
+# func(a)
+# f1 = func(a) # a是一个实参
+# f1()
+#
+# # 地址引用
+# a = 10  # 声明整型变量
+# b = a
+
+# def test():  # 声明函数
+#     print('-----test------')
+#
+# t = test
+# # test()
+# # t()
+# # print(t,test)
+#
+# def func(f):
+#     print(f)
+#     f()
+#     print('----------->func')
+#
+#
+# #调用
+# func(test)
+
+
+# sum = 0
+#
+# for i in range(1,11,1):
+#     sum += i
+#     print(i)
+# print(sum)
+
+# list = []
+# sum = 0
+# for i in range(1,101):
+#
+#     if i % 5 == 0:
+#         # print(i)
+#         sum += i
+#         list.append(sum)
+#         # print(str(sum))
+#
+#
+# print(list)
+
+# print(sum)
+
 '''
 1.产生10个1~20的随机数，去除里面的重复项
 2.键盘输入一个元素，将此元素从不重复的集合中删除
@@ -1908,6 +1978,9 @@ import random
 # generate_random()
 
 # 函数：带参数的
+import time
+from functools import reduce
+
 '''
 定义
 def 函数名（参数，参数，....）:
@@ -2302,7 +2375,6 @@ def login(username,password):
 #     else:
 #         print('验证码输入有误！')
 #
-#
 # # 调用函数
 
 # login()
@@ -2504,7 +2576,6 @@ def 外部函数（）：
 4.闭包是理解装饰器的基础
 '''
 
-
 # def func(a,b):
 #     c = 10
 #
@@ -2570,7 +2641,6 @@ def 外部函数（）：
 # counter()  # 第三次的访问
 
 
-
 # 装饰器
 ''''
  加入购物车，付款，修改收货地址......
@@ -2583,108 +2653,640 @@ def 外部函数（）：
 
 '''
 
-#定义一个装饰器
-def decorate(func):
-    a = 100
-    print('wrapper外层打印测试')
+# 定义一个装饰器
+# def decorate(func):
+#     a = 100
+#     print('wrapper外层打印测试')
+#
+#     def wrapper():
+#         func()
+#         print('------->硬装')
+#         # func()
+#         print('-------->软装',a)
+#
+#     print('wrapper加载完成....')
+#     return wrapper
+#
+# # 使用装饰器
+# @decorate
+# def house():
+#     print("我是毛坯房。。。。")
 
-    def wrapper():
-        func()
-        print('------->硬装')
-        # func()
-        print('-------->软装',a)
+'''
+1.house被装饰函数
+2.将被装饰函数作为参数传给装饰器decorate
+3.执行decorate函数
+4.将返回值又赋值给house
 
-    print('wrapper加载完成....')
-    return wrapper
-
-# 使用装饰器
-@decorate
-def house():
-    print("我是毛坯房。。。。")
+'''
 
 # 调用函数house
 # house()
 
+import random
 
-
-
-
-
-
-
-
-
+# 登录校验
+# def decorate(func):
+#     def wrapper(*args,**kwargs): # 元组（） {'clazz':'1904'}
+#         print('正在校验中....')
+#         time.sleep(2)
+#         print('校验完毕！')
+#         # 调用原函数 args----->()
+#         func(*args,**kwargs) # f1 f2 f3
 #
-# def func(number):
-#     a = 100
-#
-#     def inner_func():
-#         nonlocal a
-#         nonlocal number
-#         number += 1
-#         for i in range(number):
-#             a += 1
+#     return wrapper
 #
 #
-#         print('修改后的a：',a)
-#     return inner_func
 #
-# # 调用
-# x = func(5)
-# x()
+# @decorate
+# def f1(n):
+#     print('-----f1-------',n)
+# f1(5) # 此时的f1是wrapper,
 #
-# # 函数作为参数
-# a = 50
-# func(a)
-# f1 = func(a) # a是一个实参
-# f1()
+# @decorate
+# def f2(name,age):
+#     print('------f2-------',name,age)
+# f2('lili',20)
 #
-# # 地址引用
-# a = 10  # 声明整型变量
-# b = a
+# @decorate
+# def f3(students,clazz = '1905'):
+#     print('{}班级的学生如下：'.format(clazz))
+#     for stu in students:
+#         print(stu)
+# students = ['22s','ddff','ffdd']
+# f3(students,clazz='1904')
+#
+#
+# @decorate
+# def f4():
+#     print('-------f4----------')
+#
+# f4()
 
-# def test():  # 声明函数
-#     print('-----test------')
+
+# 装饰器
+# def zhuang1(func):
+#     print('----->1 start')
 #
-# t = test
-# # test()
-# # t()
-# # print(t,test)
+#     def wrapper(*args,**kwargs):
+#         func()
+#         print('刷漆')
+#     print('------>1 end')
 #
-# def func(f):
-#     print(f)
-#     f()
-#     print('----------->func')
 #
+#     return wrapper
+#
+#
+# def zhuang2(func):
+#     print('----->2 start')
+#
+#     def wrapper(*args,**kwargs):
+#         func()
+#         print('吊顶')
+#     print('------>2 end')
+#
+#
+#     return wrapper
+#
+#
+# @zhuang2
+# @zhuang1
+# def house():
+#     print('我是毛坯房....')
+#
+# house()
+
+
+# 装饰器带参数
+'''
+带参数的装饰器是三层的
+最外层的函数负责接收装饰器参数
+里面的内容还是原装饰器内容
+
+'''
+
+# def outer(a):  # 第一层：负责接收装饰器的参数
+#     def decorate(func): # 第二层：负责接收函数的
+#         def wrapper(*args, **kwargs):  # 第三层：负责接收函数的参数
+#             func(*args)
+#             print('---->铺地砖{}块..'.format(a))
+#
+#         return wrapper  # 返出：第三层函数名
+#
+#     return decorate  #返出来：第二层
+#
+#
+# @outer(a=10)
+# def house(time):
+#     print('我是{}日期拿到了房钥匙，是毛坯房....'.format(time))
+#
+# @outer(100)
+# def street():
+#     print('新修的街道名字是：黑泉路')
+#
+#
+#
+# house('2020-1-22')
+# street()
+
+
+# 开发：登录验证
+
+
+# islogin = False  # 默认是没有登录
+#
+#
+# # 定义一个登录函数
+# def login():
+#     username = input('输入用户名：')
+#     password = input('输入密码：')
+#     if username == 'admin' and password == '123456':
+#         return True
+#     else:
+#         return False
+#
+#
+# # 定义一个装饰器，进行登录验证
+#
+# def login_required(func):
+#     def wrapper(*args, **kwargs):
+#         global islogin
+#         print('------付款-------')
+#         # 验证用户有没有登录
+#
+#         if islogin:
+#             func(*args, **kwargs)
+#         else:
+#             # 跳转到登录页面
+#             print('用户没有登录，不能付款！')
+#             islogin = login()
+#             print('result:', islogin)
+#
+#     return wrapper
+#
+#
+# @login_required
+# def pay(money):
+#     print('正在付款，付款金额是{}元'.format(money))
+#     print('付款中...')
+#     time.sleep(2)
+#     print('付款完成！')
 #
 # #调用
-# func(test)
-
-
-
-
-
-# sum = 0
+# pay(100000)
 #
-# for i in range(1,11,1):
-#     sum += i
+#
+# pay(8000)
+
+'''
+函数：
+作用域：LEGB
+L：local 本地的
+E：encloseing 嵌套
+G：global 全局
+B：built-in 内置的
+
+嵌套函数：
+
+闭包：
+1.内层函数
+2.内层函数引用外层函数的变量
+3.返回内层函数
+
+
+装饰器：
+1.内层函数
+2.内层函数引用外层函数的变量
+3.返回内层函数
+4.函数作为外层函数参数
+
+使用装饰器：
+@装饰器名
+'''
+
+# 匿名函数:简化函数定义
+# 格式：lambda 参数1，参数2..:运算
+
+# def func():
+#     print('aaa')
+#
+# def add(a,b):
+#     s = a + b
+#     return s
+
+
+
+# s = lambda a, b: a + b
+# print(s) # s 就是函数function
+#
+# result = s(1,2)
+# print(result)
+#
+# s1 = lambda x,y:x*y
+#
+# result=s1(3,5)
+# print(result)
+
+# 匿名函数作为参数
+
+# def func(x,y,func):
+#     print(x,y)
+#     print(func)
+#     func(x,y)
+#     s = func(x,y)
+#     print(s)
+#
+# # 调用func
+# func(1,2,lambda a,b:a+b)
+
+
+# 匿名函数与内置函数的结合使用：
+# max  sorted  zip....
+
+# list1 = [3,5,3,7,8,9,1]
+# m = max(list1)
+#
+# print('列表的最大值：',m)
+#
+# list2 =[{'a':10,'b':20},{'a':6,'b':54},{'a':3,'b':27},{'a':78,'b':35}]
+#
+# m = max(list2,key=lambda x:x['b'])
+# print('列表的最大值：',m)
+
+
+#map 对列表里面的元素进行某些操作
+
+# list1 = [3,4,5,6,7,8,9,2,1]
+#
+# result = map(lambda x : x + 2, list1)
+# print(list(result))
+#
+# func = lambda x : x if x % 2 == 0 else x + 1
+#
+# result = func(5)
+# print(result)
+
+#对列表中的奇数进行加1操作
+# result = map(lambda x : x if x % 2 == 0 else x + 1,list1)
+# print(list(result))
+
+# for index,i in enumerate(list1):
+#     if i%2!=0:
+#         list1[index]=i+1
+#
+#
+# print(list1)
+
+
+# reduce（）：对列表（可迭代的）的元素进行加减乘除运算的函数
+
+# tuple1 = (2,3,4,5,6)
+#
+# result = reduce(lambda x,y:x+y,tuple1)
+# print(result)
+#
+# tuple2 = (2,)
+#
+# result = reduce(lambda x,y:x+y,tuple2,10)
+# print(result)
+
+
+#filter
+# list1 = [12,45,2,6,7,88,6]
+# result = filter(lambda x:x<10 ,list1)
+# print(list(result))
+#
+#
+# list2 = []
+# def func(list1):
+#     for i in list1:
+#         if i < 10:
+#             list2.append(i)
+#     print(list2)
+#
+# func(list1)
+
+
+# students = [
+#     {'name':'tom','age':20},
+#     {'name':'lucy','age':22},
+#     {'name':'lily','age':19},
+#     {'name':'mark','age':23},
+#     {'name':'jack','age':17},
+#     {'name':'steven','age':18},
+# ]
+
+# 找出所以年龄大于20的学生
+
+# result = filter(lambda x:x['age']>20,students)
+# print(list(result))
+
+
+# 按照年龄从小到大排序
+
+# students = sorted(students,key=lambda x:x['age'])
+# print(students)
+
+
+'''
+max()
+min()
+sorted()
+
+
+map()
+reduce()
+filter()
+
+'''
+
+# 递归函数：函数自己调用自己
+'''
+普通函数：def func():pass
+匿名函数：lambda 参数：返回结果
+递归函数：普通函数的一种表现形式
+
+特点：
+1.递归函数必须要设定终点
+2.通常都会有一个入口
+'''
+
+
+# def sum(n):# 1~n
+#     if n == 0:
+#         return 0
+#     else:
+#        return n + sum(n-1)
+#
+# result = sum(100)
+# print(result)
+#
+
+
+# def sum1(n):
+#     '''
+#     求和函数
+#     :param n: 从1~n累加和
+#     :return:求和的结果
+#     '''
+#     if n == 100:
+#         return 100
+#     else:
+#        return n + sum1(n+1)
+#
+# result = sum1(0)
+# print(result)
+
+
+
+#
+# s = 0
+# for i in range(11):
+#     s += i
+# print(s)
+#
+#
+# def f1(n):
+#     if n>0:
+#         print('---->',n)
+#         f1(n-1)
+#     else:
+#         print('---->',n)
+#
+# f1(10)
+
+
+'''
+总结函数：
+普通函数：
+  def 函数名([参数,...]):
+      函数体
+      
+      
+  1.如何定义函数
+  2.调用函数
+  
+  
+  参数：
+  1.无参数：
+  def func():
+     pass
+     
+   func()
+   
+  2.有参数：
+    一般参数：
+    
+    def func(a,b):
+      pass
+      
+    func(1,2)
+    
+    可变参数：
+    
+    def func(*args,**kwargs): args单个元素   kwargs关键字参数
+      pass
+      
+    func()
+    
+    func(1)
+    
+    func(a=10)
+    
+    默认值：
+    def func(a=10,b=10)
+       pass
+       
+    func()
+    
+    func(100)
+    
+    关键字参数：
+    
+    func(b=99)
+    
+  返回值：return
+  
+  没有返回值 
+  
+  def func()
+       print('......')
+       
+    x = func() ------>x=None
+    
+    有返回值：
+      def func()
+       return ’a‘,'b'
+       
+    x = func() ------>x=(’a‘,'b')
+    
+  嵌套函数 ----> 闭包 ----> 装饰器
+    
+    def func():
+       def wrapper():
+           ....
+           
+        return wrapper
+        
+    变量的作用域：LEGB
+    global nolocal
+    globals() locals()
+    
+    LEGB
+    L：local 本地的
+    E：encloseing 嵌套
+    G：global 全局
+    B：built-in 内置的
+    
+    装饰器：
+    
+    单层装饰器
+    
+    def decorate(func):
+        def wrapper(*args,**kwargs):
+         ....
+         
+        return warpper
+        
+    @decorate
+    def house():
+        pass
+      
+    @decorate
+    def f1(a,b):
+        pass
+        
+    多层装饰器：
+    
+    @zhuang1
+    @zhuang2
+    def fi(a,b):
+        pass
+          
+'''
+
+
+
+# 文件操作：
+'''
+文件上传：
+保存log
+
+系统函数
+open(file,mode,buffering,encodeing)
+
+读：
+open(path/filename,'rt')---->返回值：steam（管道）
+
+container = stream.read() ------>读取管道中内容
+
+注意：如果传递的文件有误，则会报错
+如果是图片则不能使用默认的读取方式，mode = 'rb'
+
+总结：
+read（）读取所有内容
+readline（）每次读取一行内容
+readlines（）读取所有的行保存到列表中
+readable（）判断是否可读
+
+mode:（r--read读 w--write写）------纯文本文件
+     【rb---read binary（二进制） wb--write binary】-----纯文本、图片、音乐、视频
+     
+文件上传：
+
+文件下载：
+
+'''
+
+
+# stream = open(r'D:\aa.txt')
+
+# container = stream.read()
+# print(container)
+
+# result = stream.readable()  #判断是否可以读取 true false
+# print(result)
+
+# while True:
+#     line = stream.readline()
+#     print(line)
+#     if not line:
+#         break
+
+
+# lines = stream.readlines() # 保存到列表中
+# print(lines)
+# for i in lines:
 #     print(i)
-# print(sum)
-
-# list = []
-# sum = 0
-# for i in range(1,101):
 #
-#     if i % 5 == 0:
-#         # print(i)
-#         sum += i
-#         list.append(sum)
-#         # print(str(sum))
+
+# 写文件
+'''
+stream = open(r'D:\aa.txt','w')
+mode是'w'表示就是写操作  每次都会将原来的内容清空
+
+方法：
+   write（内容） 每次都会将原来的内容清空，然后写当前的内容
+   writelines(Iterable) 没有换行的效果
+   stream.writelines(['高进\n','赌圣\n','小刀\n']) ------>自己加
+   
+如果 mode=‘a’----> append追加 每次都不会将原来的内容清空
+
+'''
+stream = open(r'D:\aa.txt','w')
+
+# stream.writable() #判断文件是否可写
+
+# s='''
+# 你好！
+#     欢迎来到开心刮刮乐，来啊来啊~
+#                 工作人员：哦哦
+# '''
+# result = stream.write('hello')
+# # print(result)
+#
+# stream.write('龙五')
+#
+# stream.writelines(['高进\n','赌圣\n','小刀\n'])
+#
+# stream.close() #释放资源
+
+
+# 文件复制
+'''
+原文件：D:\壁纸\tim.jpg
+目标文件：D:\tim.jpg
+
+D:\learn\test1
+D:\learn\test2
+
+with 结合open使用，可以帮助我们自动释放资源
+'''
+
+# stream = open(r'D:\壁纸\tim.jpg','rb')
+# with open(r'D:\壁纸\tim.jpg','rb') as rstream:
+#     container = rstream.read() # 读取文件内容
 #
 #
-# print(list)
+# with open(r'D:\tim.jpg','wb') as wstream:
+#     wstream.write(container)
+#
+# print('文件复制完成！')
 
-# print(sum)
+# stream.close()
 
+# 模块：os.py
+import os
+
+#tim.jpg保存到当前文件夹所在的目录
+with open(r'D:\壁纸\tim.jpg','rb') as rstream:
+    container = rstream.read() # 读取文件内容
+
+path = os.path.dirname(__file__)
+result = os.path.join(path,'tim.jpg')
+# print(result)
+
+with open(result,'wb') as wstream:
+    wstream.write(container)
 
 
