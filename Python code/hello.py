@@ -2875,7 +2875,6 @@ B：built-in 内置的
 #     return s
 
 
-
 # s = lambda a, b: a + b
 # print(s) # s 就是函数function
 #
@@ -2914,7 +2913,7 @@ B：built-in 内置的
 # print('列表的最大值：',m)
 
 
-#map 对列表里面的元素进行某些操作
+# map 对列表里面的元素进行某些操作
 
 # list1 = [3,4,5,6,7,8,9,2,1]
 #
@@ -2926,7 +2925,7 @@ B：built-in 内置的
 # result = func(5)
 # print(result)
 
-#对列表中的奇数进行加1操作
+# 对列表中的奇数进行加1操作
 # result = map(lambda x : x if x % 2 == 0 else x + 1,list1)
 # print(list(result))
 
@@ -2951,7 +2950,7 @@ B：built-in 内置的
 # print(result)
 
 
-#filter
+# filter
 # list1 = [12,45,2,6,7,88,6]
 # result = filter(lambda x:x<10 ,list1)
 # print(list(result))
@@ -3011,7 +3010,6 @@ filter()
 2.通常都会有一个入口
 '''
 
-
 # def sum(n):# 1~n
 #     if n == 0:
 #         return 0
@@ -3036,7 +3034,6 @@ filter()
 #
 # result = sum1(0)
 # print(result)
-
 
 
 #
@@ -3165,8 +3162,6 @@ filter()
           
 '''
 
-
-
 # 文件操作：
 '''
 文件上传：
@@ -3197,7 +3192,6 @@ mode:（r--read读 w--write写）------纯文本文件
 文件下载：
 
 '''
-
 
 # stream = open(r'D:\aa.txt')
 
@@ -3233,7 +3227,7 @@ mode是'w'表示就是写操作  每次都会将原来的内容清空
 如果 mode=‘a’----> append追加 每次都不会将原来的内容清空
 
 '''
-stream = open(r'D:\aa.txt','w')
+stream = open(r'D:\aa.txt', 'w')
 
 # stream.writable() #判断文件是否可写
 
@@ -3276,17 +3270,421 @@ with 结合open使用，可以帮助我们自动释放资源
 # stream.close()
 
 # 模块：os.py
+# import os
+
+# tim.jpg保存到当前文件夹所在的目录
+# with open(r'D:\壁纸\tim.jpg','rb') as rstream:
+#     container = rstream.read() # 读取文件内容
+#     file = stream.name
+#     filename = file[file.rfind('\\')+1:] # 截取文件名
+#
+# path = os.path.dirname(__file__)
+# result = os.path.join(path,filename)
+# # print(result)
+#
+# with open(result,'wb') as wstream:
+#     wstream.write(container)
+
+
+# os 模块
+
 import os
 
-#tim.jpg保存到当前文件夹所在的目录
-with open(r'D:\壁纸\tim.jpg','rb') as rstream:
-    container = rstream.read() # 读取文件内容
+# os.path里的函数
 
-path = os.path.dirname(__file__)
-result = os.path.join(path,'tim.jpg')
+
+# absolute 绝对的 D:\壁纸\tim.jpg
+# 相对路径：../../xxx/xxx
+# 获取路径：directory 目录 文件夹
+# 当前文件所在的文件夹路径
+
+# path = os.path.dirname(__file__)
+
+# 通过相对路径得到绝对路径
+# s = os.path.abspath('aa.txt')
+
+# 获取当前文件的绝对路径
+# path = os.path.abspath(__file__)
+
+# 获取当前文件夹的路径
+# path = os.getcwd()
+
+# r = os.path.isabs('D:\壁纸\tim.jpg')
+
+# print(path)
+
+
+# 得到文件名
+# filename = path[path.rfind('\\')+1:]
+# r = r'D:\壁纸\tim.jpg'
+#
+# result = os.path.split(r)
+#
+# print(result)
+# print(result[1])
+
+# 分割文件与扩展名
+# result = os.path.splitext(r)
 # print(result)
 
-with open(result,'wb') as wstream:
-    wstream.write(container)
+# 获取文件大小，单位是字节
+# size = os.path.getsize(r)
+# print(size)
+#
+# result = os.path.join(os.getcwd(),'file','a','al.jpg')
+
+'''
+os.path:常用函数
+dirname() 获取指定文件目录
+join() 拼接获取新的路径
+split() 分割（文件目录，文件名）
+splittext() 分割（文件目录\文件名，文件的扩展名）
+getsize() 获取文件大小
+
+isabs() 判断是否是绝对路径
+isfile() 判断是否是文件
+isdir() 判断是否是文件夹
+
+'''
+
+# os中的函数：
+
+# dir = os.getcwd()
+# print(dir)
+
+# 返回指定目录下的所有的文件和文件夹，保存到列表中
+# all = os.listdir(r'D:\壁纸')
+# print(all)
+
+# 创建文件夹
+# if not os.path.exists(r'D:\壁纸\testimg'):
+#     f = os.mkdir(r'D:\壁纸\testimg')
+#     print(f)
+
+# 删除文件夹,只能移除空文件夹
+# f = os.rmdir(r'D:\壁纸\testimg')
+# print(f)
 
 
+# f = os.removedirs(r'D:\壁纸\testimg')
+# print(f)
+
+
+# 删除文件
+# os.remove(r'D:\壁纸\testimg\aa.txt')
+
+# 删除p4文件夹
+
+# path = r'D:\壁纸\testimg\p4'
+#
+# filelist = os.listdir(path)
+#
+# for file in filelist:
+#     path1 = os.path.join(path,file)
+#     os.remove(path1)
+# else:
+#     os.rmdir(path)
+#
+# print('删除成功！')
+
+# 切换目录
+# os.chdir()
+
+
+'''
+os模块方法：
+os.getcwd() 获取当前目录
+os.listdir() 浏览文件夹
+os.mkdir() 创建文件夹
+os.rmdir() 删除空的文件夹
+os.remove() 删除文件
+os.chdir() 切换目录
+'''
+
+# 文件复制
+# src_path = r'D:\壁纸\testimg\p4'
+# target_path = r'D:\壁纸\testimg\p3'
+
+
+# # 封装成函数
+# def copy(src, target):
+#     if os.path.isdir(src) and os.path.isdir(target):  # 判断是否为文件夹
+#         filelist = os.listdir(src)  # 列出要复制的文件夹中所有文件列表
+#
+#         for file in filelist:  # 遍历文件列表
+#
+#             path = os.path.join(src, file)  # 拼接完整路径
+#             with open(path, 'rb') as rstream:  # 建立一个通道缓存
+#                 container = rstream.read()  # 读取文件内容，把文件内容放进去
+#
+#                 path1 = os.path.join(target, file)  # 拼接目标文件夹中文件的完整路径
+#                 with open(path1, 'wb') as wstream:  # 建立一个通道
+#                     wstream.write(container)  # 写入需要复制的文件内容
+#         else:
+#             print('复制完毕')
+#
+#
+# # 调用函数
+# copy(src_path, target_path)
+
+
+# 文件夹包文件夹复制
+# src_path = r'D:\壁纸\testimg\p4'
+# target_path = r'D:\壁纸\testimg\p2'
+#
+# # 封装成递归函数
+# def copy(src_path,target_path):
+#     filelist = os.listdir(src_path) # 获取文件夹内容
+#     for file in filelist:  # 遍历文件列表
+#         path = os.path.join(src_path, file)  # 拼接完整路径
+#         if os.path.isdir(path): # 判断是否是文件夹
+#            target_path1 = os.path.join(target_path,file)
+#            os.mkdir(target_path1)
+#            copy(path,target_path1) # 递归调用
+#         else: # 不是文件夹直接进行复制
+#             with open(path, 'rb') as rstream:  # 建立一个通道缓存
+#                 container = rstream.read()  # 读取文件内容，把文件内容放进去
+#                 path1 = os.path.join(target_path, file)  # 拼接目标文件夹中文件的完整路径
+#                 with open(path1, 'wb') as wstream:  # 建立一个通道
+#                     wstream.write(container)  # 写入需要复制的文件内容
+#     else:
+#         print('复制完成！')
+#
+# copy(src_path,target_path)
+
+
+
+# 图书管理系统   D:\壁纸\testimg\p2\p1
+# 持久化保存：文件
+# 非持久化：list 元组 字典----->内存
+# 用户注册
+
+# def register():
+#     username = input('输入用户名：')
+#     password = input('输入密码：')
+#     repassword = input('再次输入密码：')
+#
+#     if password == repassword:
+#         # 保存信息
+#         with open(r'D:\壁纸\testimg\p2\p1\users.txt','a') as wstream:
+#             wstream.write('{} {}\n'.format(username,password))
+#
+#         print('用户注册成功！')
+#
+#     else:
+#         print('密码不一致！')
+#
+#
+# # 用户登录
+# def login():
+#     username = input('输入用户名：')
+#     password = input('输入密码：')
+#
+#     if username and password:
+#         with open(r'D:\壁纸\testimg\p2\p1\users.txt','r') as rstream:
+#             while True:
+#                 user = rstream.readline() # feifei 123456\n
+#
+#                 if not user:
+#                     print('用户名或者密码输入有误！')
+#                     break
+#
+#                 input_user = '{} {}\n'.format(username,password)
+#                 # 如果用户输入的根文件中的内容一致则认为用户登录成功
+#                 if user == input_user:
+#                     print('用户登录成功！')
+#                     break
+#
+#
+# def show_books():
+#     print('图书馆里面的书名：')
+#     with open(r'D:\壁纸\testimg\p2\p1\books.txt','r',encoding='utf-8') as rstream:
+#         books = rstream.readlines()
+#         for book in books:
+#             print(book,end='') # 因为读取的内容中有\n 所以取消print中自带的末尾换行
+
+# 调用函数
+# register()
+# login()
+# show_books()
+
+
+
+
+# 语法错误与异常
+
+# 语法错误：
+# while True
+#     print('----')
+
+# number = 100
+# def func():
+#     number += 1
+
+
+# 异常：程序运行时报出来的，xxxError
+# def chu(a,b):
+#     return a/b
+#
+#
+# x = chu(1,0) # ZeroDivisionError: division by zero
+# print('------------->',x)
+
+
+# 异常处理：
+'''
+try:
+    可能出现异常的代码
+except：
+    如果有异常执行的代码
+[finally：
+    无论是否存在异常都会被执行的代码]
+
+   
+
+    
+情况1：
+try:
+   有可能产生多种异常
+except 异常的类型1：
+   print（。。。。。）
+except 异常的类型2：
+   print（。。。。。）
+except 异常的类型3：
+   print（。。。。。）
+except Exception：
+   pass
+如果是多个except，异常类型的顺序需要注意，Exception需要放在最下面
+
+
+情况2：获取Exception错误原因
+try:
+   有可能产生多种异常
+except 异常的类型1：
+   print（。。。。。）
+except Exception as err：
+   print(err)------>err的内容就是错误原因
+   
+情况3：
+try:
+    可能出现异常的代码
+except：
+    如果有异常执行的代码
+[finally：
+    无论是否存在异常都会被执行的代码]
+else:
+   如果try中没有异常则进入的代码
+   
+注意：如果使用else则在try代码中不能出现return
+
+情况4：
+# 文件操作  stream.close()
+# 数据库操作  close()
+try:
+    pass
+except：
+    pass
+finally：
+    pass---->释放资源
+    
+
+
+'''
+# def func():
+#     try:
+#         n1 = int(input('输入第一个数字：'))
+#         n2 = int(input('输入第二个数字：'))
+#
+#         per = input('输入运算符号（+ - * /）：')
+#
+#         if per == '+':
+#             result = n1+n2
+#         elif per == '-':
+#             result = n1-n2
+#
+#         elif per == '*':
+#             result = n1*n2
+#
+#         elif per == '/':
+#             result = n1/n2
+#         else:
+#             print('符号输入有误！')
+#
+#
+#         print('结果是：',result)
+#
+#
+#         # 操作列表
+#         list1 = []
+#         list1.pop()
+#
+#         # 文件操作
+#         # with open(r'D:\壁纸\testimg\p2\p1\books.txt','w') as wstream:
+#         #     wstream.write('本次的运算结果是：{}'.format(result))
+#         with open(r'D:\壁纸\testimg\p2\p1\books.txt', 'r') as rstream: # FileNotFoundError
+#             print(rstream.read())
+#
+#     except ZeroDivisionError:
+#         print('除数不能为零！')
+#     except ValueError:
+#         print('必须输入数字！！！')
+#     except Exception as err:
+#         print('出错啦！！',err)
+#
+# func()
+# print('--------->')
+
+
+#else不能出现return
+# def func():
+#     try:
+#         n1 = int(input('输入数字：'))
+#         print(n1)
+#         return 1
+#     except ValueError:
+#         print('必须是数字....')
+#         return 2
+#     else:
+#         print('数字输入完毕！') #没有异常才会执行的代码快
+#
+# func()
+
+
+# 文件释放资源
+# def func():
+#     stream=None
+#     try:
+#         stream = open(r'D:\壁纸\testimg\p2\p1\books.txt',encoding='utf_8')
+#         contanier = stream.read()
+#         print(contanier)
+#         return 1
+#     except Exception as err:
+#         print(err)
+#         return 2
+#     finally:
+#         print('------->')
+#         if stream:
+#             stream.close()
+#         return 3
+# x = func()
+# print(x)
+
+
+# 抛出异常 raise
+
+# 注册用户名必须6位
+
+def register():
+    username = input('输入用户名：')
+    if len(username)<6:
+        raise Exception('用户名长度必须6位以上')
+    else:
+        print('输入用户名是：',username)
+
+try:
+    register()
+except Exception as err:
+    print(err)
+    print('注册失败！')
+else:
+    print('注册成功！')
