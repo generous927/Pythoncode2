@@ -3453,7 +3453,6 @@ os.chdir() 切换目录
 # copy(src_path,target_path)
 
 
-
 # 图书管理系统   D:\壁纸\testimg\p2\p1
 # 持久化保存：文件
 # 非持久化：list 元组 字典----->内存
@@ -3507,8 +3506,6 @@ os.chdir() 切换目录
 # register()
 # login()
 # show_books()
-
-
 
 
 # 语法错误与异常
@@ -3635,7 +3632,7 @@ finally：
 # print('--------->')
 
 
-#else不能出现return
+# else不能出现return
 # def func():
 #     try:
 #         n1 = int(input('输入数字：'))
@@ -3674,17 +3671,142 @@ finally：
 
 # 注册用户名必须6位
 
-def register():
-    username = input('输入用户名：')
-    if len(username)<6:
-        raise Exception('用户名长度必须6位以上')
-    else:
-        print('输入用户名是：',username)
+# def register():
+#     username = input('输入用户名：')
+#     if len(username)<6:
+#         raise Exception('用户名长度必须6位以上')
+#     else:
+#         print('输入用户名是：',username)
+#
+# try:
+#     register()
+# except Exception as err:
+#     print(err)
+#     print('注册失败！')
+# else:
+#     print('注册成功！')
 
-try:
-    register()
-except Exception as err:
-    print(err)
-    print('注册失败！')
-else:
-    print('注册成功！')
+
+# 列表推导式 字典推导式 集合推导式
+# 旧的列表 ---> 新的列表
+
+# 1.列表推导式： 格式：[表达式 for 变量 in 旧列表] 或者 [表达式 for 变量 in 旧列表 if 条件]
+
+
+# 过滤掉长度小于等于3的人名，得到的列表首字母大写 有条件
+# names = ['tom', 'lily', 'abc', 'jack', 'steven', 'bob', 'ha']
+#
+# result = [name.capitalize() for name in names if len(name) > 3]
+#
+# print(result)
+
+'''
+def func(names):
+    newlist = []
+    for name in names:
+        if len(name)>3:
+           name = name.title()
+           newlist.append(name)
+        return newlist
+'''
+
+# 将1到100之间能被3整除，组成一个新的列表
+
+# newlist = [i for i in range(1,101) if i % 3 == 0 and i % 5 == 0]
+# print(newlist)
+
+# 0~5的偶数 0~10的奇数
+# [(偶数,奇数),(),(),()]  [(0,1),(0,3),(0,5),(0,7),(0,9),(2,1),(2,3)]
+
+# newlist = [(x, y) for x in range(5) if x % 2 == 0 for y in range(10) if y % 2 != 0]
+# print(newlist)
+'''
+def func():
+    newlist = []
+    for i in range(5):
+        if i%2==0:
+            for j in range(10):
+                if j %2!=0:
+                    newlist.append((i,j))
+    print(newlist)
+
+func()
+'''
+
+#list1 = [[1,2,3],[4,5,6],[7,8,9],[1,3,5]] ---> [3,6,9,5] 没有条件
+# list1 = [[1,2,3],[4,5,6],[7,8,9],[1,3,5]]
+# newlist = [i[-1] for i in list1]
+
+
+# dict1 = {'name':'tom','salary':5000}
+# dict2 = {'name':'lucy','salary':8000}
+# dict3 = {'name':'jack','salary':4500}
+# dict4 = {'name':'lily','salary':3000}
+# # 如果薪资大于5000加200，低于5000加500
+#
+#
+# list1 = [dict1,dict2,dict3,dict4]
+#
+# newlist = [person['salary']+200 if person['salary']>5000 else person['salary']+500 for person in list1 ]
+# print(newlist)
+
+
+#集合推导式 {}类似列表推导式，在列表推导式的基础上添加了一个去除重复项
+# list1 = [1,2,1,3,5,2,1,3,4,5,9,0]
+#
+# set1 = {x-1 for x in list1 if x > 5}
+# print(set1)
+
+# 字典推导式
+# dict1 = {'a':'A','b':'B','c':'C','d':'C'}
+#
+# newdict = {value:key for key,value in dict1.items()}
+#
+# print(newdict)
+
+
+'''
+通过列表生成式（列表推导式），我们可以直接创建一个列表
+但是，受内存限制，列表容量肯定是有限的
+而且，创建一个包含100万个元素的列表，不仅占用很大的储存空间，如果我们仅仅需要访问前面的几个元素，那后面绝大多数元素占用的空间都白白浪费了
+所以，如果列表元素可以按照某种算法推算出来，那我们是否可以在循环的过程中不断推算出后续的元素呢？
+这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器：generator
+
+得到生成器方式：
+1.通过列表推导式得到生成器
+
+
+'''
+
+# [x for x in range(100000000000)]
+
+#[0,3,6,9,12,15,18,21,.....27]
+
+# newlist = [x*3 for x in range(10)]
+# print(type(newlist))
+
+
+# 得到生成器
+g = (x*3 for x in range(10))
+print(type(g)) #generator
+
+# 方式1：通过__next__()方式得到元素
+print(g.__next__())
+print(g.__next__())
+print(g.__next__())
+print(g.__next__())
+
+#方式2：next（生成器对象） builtins系统内置函数
+#每调用一次next则会产生一个元素
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g)) # StopIteration 生成器本来就可以产生10个，得到了10个
+print(next(g))
+print(next(g))
