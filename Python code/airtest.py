@@ -14,3 +14,4 @@ touch(Template(r"D:\learn\airtestcode\Airtestrun.air\tpl1644473193503.png", reco
 sleep(2.0)
 
 poco(text='歌单').click()
+
