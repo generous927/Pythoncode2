@@ -3787,26 +3787,178 @@ func()
 
 
 # 得到生成器
-g = (x*3 for x in range(10))
-print(type(g)) #generator
+# g = (x*3 for x in range(10))
+# print(type(g)) #generator
 
 # 方式1：通过__next__()方式得到元素
-print(g.__next__())
-print(g.__next__())
-print(g.__next__())
-print(g.__next__())
+# print(g.__next__())
+# print(g.__next__())
+# print(g.__next__())
+# print(g.__next__())
 
 #方式2：next（生成器对象） builtins系统内置函数
 #每调用一次next则会产生一个元素
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g))
-print(next(g)) # StopIteration 生成器本来就可以产生10个，得到了10个
-print(next(g))
-print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g)) # StopIteration 生成器本来就可以产生10个，得到了10个，再调用就会抛出异常
+
+# g = (x*3 for x in range(10))
+#
+# while True:
+#     try:
+#         e = next(g)
+#         print(e)
+#     except:
+#         print('没有更多元素')
+#         break
+
+# 定义生成器的方式二：借助函数完成
+#只要函数中出现了yield关键字，说明函数变成生成器了
+# 菲波那切数列
+
+'''
+步骤：
+1.定义一个函数，函数中使用yield关键字
+2.调用函数，接收调用的结果
+3.得到的结果就是生成器
+4.借助next(),__next__()得到元素
+
+'''
+
+# def func():
+#     n=0
+#     while True:
+#         n+=1
+#         # print(n)
+#         yield n  # return n + 暂停
+# g = func()
+# print(g)
+
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+
+# list = [2,5,4,9,8]
+# list1 = list[1:5]
+# list2 = []
+# for i in list1:
+#     if i%2==0:
+#         list2.append(i)
+# print(list2)
+
+# def fib(length):
+#     a,b = 0,1
+#     n = 0
+#
+#     while n<length:
+#         # print(b)
+#         yield b
+#         a,b=b,a+b
+#         n+=1
+#
+#     return '没有更多元素了！' # return就是在得到StopIteration后的提示信息
+#
+# g = fib(8)
+#
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+
+
+'''
+生成器方法：
+__next__():获取下一个元素
+send(Value):向每次生成器调用中传值，注意第一次需要传None,send(None)
+'''
+# def gen():
+#     i=0
+#     while i<5:
+#         temp = yield i # return 0 + 暂停
+#         print('temp:',temp)
+#
+#         for x in range(temp):
+#             print('----->',x)
+#         print('************')
+#         i += 1
+#     return '没有更多的数据'
+#
+# g = gen()
+
+# print(next(g))
+# print(next(g))
+# print(next(g))
+# print(next(g))
+
+# g.__next__()
+# n = g.send(None)
+# n1 = g.send(2)
+# n2 = g.send(5)
+#
+# print(n,n1,n2)
+
+
+
+# 进程 > 线程 > 协程（交替完成）
+
+def task1(n):
+    for i in range(n):
+        print('正在搬第{}块砖！'.format(i))
+        yield
+
+def task2(n):
+    for i in range(n):
+        print('正在听第{}首歌！'.format(i))
+        yield
+
+g1 = task1(5)
+g2 = task2(5)
+
+while True:
+    try:
+        g1.__next__()
+        g2.__next__()
+    except:
+        break
+'''
+生成器:generator
+定义生成器方式：
+1.通过列表推导式方式
+  g = （x+1 for x in range (6)）
+  
+2.函数+yield
+  def fun():
+      .....
+      yiled
+      
+    g = fun()
+产生元素：
+1.next(generator) ---->每次调用都会产生一个新的元素，如果元素产生完毕，再次调用的话会产生异常
+2.生成器自己的方法：
+   g.__next__()
+   g.send(value)
+   
+应用：协程
+'''
+
+# 可迭代的对象：1.generator生成器 2.列表、元组、集合、字典、字符串
+# 如何判断一个对象是否可迭代
+
+# for collections import Interable
+# list1=[1,23,45,6,3]
+# isinstance(list1,Interable)
+
+
