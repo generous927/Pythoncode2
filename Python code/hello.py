@@ -3914,25 +3914,25 @@ send(Value):向每次生成器调用中传值，注意第一次需要传None,sen
 
 # 进程 > 线程 > 协程（交替完成）
 
-def task1(n):
-    for i in range(n):
-        print('正在搬第{}块砖！'.format(i))
-        yield
-
-def task2(n):
-    for i in range(n):
-        print('正在听第{}首歌！'.format(i))
-        yield
-
-g1 = task1(5)
-g2 = task2(5)
-
-while True:
-    try:
-        g1.__next__()
-        g2.__next__()
-    except:
-        break
+# def task1(n):
+#     for i in range(n):
+#         print('正在搬第{}块砖！'.format(i))
+#         yield
+#
+# def task2(n):
+#     for i in range(n):
+#         print('正在听第{}首歌！'.format(i))
+#         yield
+#
+# g1 = task1(5)
+# g2 = task2(5)
+#
+# while True:
+#     try:
+#         g1.__next__()
+#         g2.__next__()
+#     except:
+#         break
 '''
 生成器:generator
 定义生成器方式：
@@ -3957,8 +3957,178 @@ while True:
 # 可迭代的对象：1.generator生成器 2.列表、元组、集合、字典、字符串
 # 如何判断一个对象是否可迭代
 
-# for collections import Interable
+# from collections.abc import Iterable
 # list1=[1,23,45,6,3]
-# isinstance(list1,Interable)
+# f = isinstance(list1,Iterable)
+# print(f)
+#
+# f = isinstance("abc",Iterable)
+# print(f)
+#
+# f = isinstance(100,Iterable)
+# print(f)
+#
+# g = (x+1 for x in range(10))
+# f = isinstance(g,Iterable)
+# print(f)
+
+
+'''
+迭代是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。
+特点：
+迭代器对象从集合的第一个元素开始访向直到所有的元素被访问完结束。
+迭代器只能往前不会后退。
+可以被next()函数调用并不断返回下一个值的对象称为迭代器:Iterator。
+
+可迭代的 是不是肯定就是 迭代器?
+生成器是可迭代的，也是迭代器
+list是可迭代的，但不是迭代器
+
+
+list--->iter(list)---->迭代器next()
+
+
+生成器与迭代器：
+生成器是迭代器的一种
+
+'''
+
+# list1 = [1,23,4,6]
+# # print(next(list1))  # TypeError: 'list' object is not an iterator
+#
+# list1 = iter(list1)  # 通过iter()函数将可迭代的变成一个迭代器
+#
+# print(next(list1))
+# print(next(list1))
+
+
+'''
+面向对象：
+程序      现实中
+对象 ----> 具体的事物
+
+现实中的事物---->转成电脑程序
+时间万物皆对象
+
+好处：
+
+面向对象：
+类
+对象
+属性
+方法
+
+对象：
+小雨的手机
+小微的手机
+小牧的手机
+小四的手机
+...
+
+对象的集合 -----> 共同特征：品牌  颜色  大小  价格  内存    动作：打电话 发短信 上网  游戏
+
+类别： 手机类：共同特征：品牌  颜色  大小  价格  内存    动作：打电话 发短信 上网  游戏
+      学生类：特征：姓名  年龄  性别  身高  血型  婚否(属性)   动作：刷抖音  敲代码  看书 ...(方法)
+      
+多个对象 ---> 提取对象的共同特征和动作 ---> 封装到一个类中
+
+
+'''
+# 所以类名要求首字母大写，多个单词使用驼峰式命名
+# ValueError
+# object
+'''
+class 类名【（父类）】：
+     属性：特征
+     方法：动作
+
+'''
+# class Phone:
+#     # 属性
+#     brand = 'huawei'
+#     # 方法
+#
+# print(Phone)
+
+# 使用类创建对象
+# yp = Phone()
+# print(yp)
+# print(yp.brand)
+# yp.brand = 'iphone'
+# print(yp.brand)
+#
+#
+# feifei = Phone()
+# print(feifei)
+# print(feifei.brand)
+# feifei.brand='iphone xxs'
+# print(feifei.brand)
+#
+#
+# xiaowei = Phone()
+# print(xiaowei.brand)
+
+
+# 定义类和属性
+# 定义类
+# class Student:
+    # 类属性
+    # name = 'xiaowei'
+    # age = 2
+
+# 使用类创建对象
+# xiaowei = Student()
+
+
+#对象属性
+# xiaowei.age = 18
+#
+# print(xiaowei.age)# 先找自己空间中的属性，找不到再去类中找
+# print(xiaowei.name)
+#
+# yupeng = Student()
+# yupeng.name = 'xiaopeng'
+# yupeng.age = 1
+# print(yupeng.name)
+#
+#
+# Student.name='feifei'
+#
+#
+# ruirui = Student()
+# print(ruirui.name)
+
+
+# 类中方法：动作
+# 种类： 普通方法 类方法 静态方法 魔术方法
+'''
+普通方法格式：
+def 方法名（self【，参数，参数】）：
+   pass
+
+'''
+#
+# class Phone:
+#     brand = 'xiaomi'
+#     price = 4999
+#     type = 'mate 80'
+#
+#     #Phone类里面的方法：call
+#     def call(self):
+#         print('self----------->',self)
+#         print('正在打电话......')
+#
+#
+# phone1 = Phone()
+# print(phone1)
+# # print(phone1.brand)
+# phone1.call()
+#
+#
+# print('*'*30)
+# phone2 = Phone()
+# print(phone2)
+
+# print(int(186/10))
 
 
