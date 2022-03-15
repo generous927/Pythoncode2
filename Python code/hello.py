@@ -80,11 +80,17 @@
 # 	n=n+1
 # print('END')
 
+# list = range(0, 101, 1)
+# for s in range(len(list)):
+#     print(list[s])
+
+
 
 # n = 0
 # while n < 10:
 # 	n = n + 1
 # 	print(n)
+
 
 # n = 0
 # while n < 10:
@@ -116,12 +122,33 @@
 # 	print(sum)
 
 
+
 # def my_abs(x):
 # 	if x>=0:
 # 		return(x)
 # 	else:
 # 		return(-x)
 # print(my_abs(-9))
+
+# try:
+#     week = int(input("请输入："))
+#     if type(week)==int:
+#         print('这是周{}'.format(week))
+#     else:
+#         print('请重新输入！')
+# except:
+#     print("输入有误，请重新输入")
+
+# while True:
+#     try:
+#         s = int(input("请输入1~7："))
+#         weekday = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日']
+#         date = weekday[s-1]
+#         print(date)
+#         break
+#     except:
+#         print('输入的数据类型有误！')
+
 
 
 # 这是开始
@@ -228,6 +255,11 @@
 #         continue
 #     print('Input is of sufficent length')
 
+
+# for letter in 'Python':     # 第一个实例
+#    if letter == 'h':
+#       continue
+# print('当前字母 :', letter)
 
 # 函数
 # def sayHello():
@@ -4132,3 +4164,39 @@ def 方法名（self【，参数，参数】）：
 # print(int(186/10))
 
 
+#今日北京天气：阴，气温：高温 4℃~低温 -4℃,感冒多发期，适当减少外出频率，适量补充水分，适当增减衣物。
+#请结合任务五，在右侧环境内读取当天北京的最高温度、最低温度、感冒预警信息，并使用格式化字符输出。
+# import requests
+# data = requests.get('http://wthrcdn.etouch.cn/weather_mini?city=北京')
+# weather = data.json()
+# print(weather)
+# print(weather['data']['forecast'][1]['fengli'])
+# city = weather["data"]['city']
+# tianqi = weather['data']['forecast'][0]['type']
+# gaowen = weather['data']['forecast'][0]['high']
+# diwen = weather['data']['forecast'][0]['low']
+# ganmao = weather['data']['ganmao']
+# print('今日{}天气：{}，气温：{}~{}，{}'.format(city,tianqi,gaowen,diwen,ganmao))
+
+
+# i = 2
+# while (i < 100):
+#     j = 2
+#     while (j <= (i / j)):
+#         if not (i % j): break
+#         j = j + 1
+#     if (j > i / j):
+#         print(i, " 是素数")
+#     i = i + 1
+#
+# print("Good bye!")
+
+
+dic1 = {'1':'星期一','2':'星期二','3':'星期三','4':'星期四','5':'星期五','6':'星期六','7':'星期日'}
+s = int(input("请输入1-7的数字："))
+for i in dic1:
+    if s == dic1[i] and s > 0:
+        print(i)
+    else:
+        print('输入错误！')
+        break
