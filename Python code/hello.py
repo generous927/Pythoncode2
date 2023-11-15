@@ -4192,11 +4192,169 @@ def 方法名（self【，参数，参数】）：
 # print("Good bye!")
 
 
-dic1 = {'1':'星期一','2':'星期二','3':'星期三','4':'星期四','5':'星期五','6':'星期六','7':'星期日'}
-s = int(input("请输入1-7的数字："))
-for i in dic1:
-    if s == dic1[i] and s > 0:
-        print(i)
-    else:
-        print('输入错误！')
-        break
+# dic1 = {'1':'星期一','2':'星期二','3':'星期三','4':'星期四','5':'星期五','6':'星期六','7':'星期日'}
+# s = int(input("请输入1-7的数字："))
+# for i in dic1:
+#     if s == dic1[i] and s > 0:
+#         print(i)
+#     else:
+#         print('输入错误！')
+#         break
+
+
+# for i in range(0,10):
+#     for j in range(9):
+#         print('{}*{}={}'.format(i,j,i*j),end='\t')
+#     print('')
+
+
+
+# for i in range(9,0,-1):
+#     for j in range(1,i+1):
+#         print('{}*{}={}'.format(j,i,i*j),end='\t')
+#     print('')
+
+    # for i in range(9, 1 - 1, -1):
+    #     for k in range(1, 9 - i + 1):
+    #         print(end="\t\t")
+    #     for j in range(i, 0, -1):
+    #         print("{}X{}={}".format(j, i, i * j), end="\t")
+    #     print("")
+    #
+    # print("=" * 80)
+
+
+# list = ['a','b','g','f']
+# list1=[]
+#
+# for i in range(len(list)-1,-1,-1):
+#     list1.append(list[i])
+# print(list1)
+
+
+'''
+回顾：
+
+列表推导式：
+[表达式 for 变量 in 列表]
+
+[x+2 for x in list]--->新的列表
+
+1.[表达式 for 变量 in 列表 if 条件]
+  [x+2 for x in list1 if x%2==0]
+
+2.[结果A if 条件 else 结果B for x in list1]
+  [x+2 if x%2==0 else x+1 for x in list1]
+  
+集合推导式：{表达式 for 变量 in 列表}--->类似列表式，但是没有重复元素
+字典推导式：{key,value for k,v in 字典.items()}
+
+生成器：generator（节省内存）
+1.使用类似的列表推导式  g = (表达式 for 变量 in 列表)
+  此时的g就是生成器
+2.函数+yield
+  
+  def func():
+      ....
+      yield
+      ....
+      
+  g = func()
+  
+得到里面的元素：
+   
+   系统函数： next(g)
+   
+   生成器里面的函数：__next__(),[send(None),send(e)]
+   
+可迭代的与迭代器：
+1.生成器  2.字符串，列表，集合，....
+
+Iterable
+
+isinstance(x,Iterable) --->True,False
+
+生成器就是一个迭代器 --->next(g) --->下一个元素
+next(list) ---> iter(list) ---->next(iter(list))
+
+面向对象
+
+类
+
+class 类名:
+    特征：属性
+    动作：方法
+    
+实例，对象
+
+huawei = Phone()
+huewei.price = 5999
+'''
+
+
+
+# 类中方法：动作
+# 种类：普通方法  类方法  静态方法  魔术方法
+'''
+普通方法：
+def 方法名(self[,参数，参数])：
+  pass
+  
+'''
+
+# class Phone:
+#     brand = 'huawei'
+#     price = 5999
+#     type = 'p30'
+#
+#     # Phone类里面方法：call
+#     def call(self):
+#         print('***********',self)
+#         print('正在访问通讯录：')
+#         for person in self.phone_book:
+#             print(person.items())
+#         print('正在打电话.....')
+#         print('留言：',self.note)
+#
+#
+# phone1 = Phone()
+# print(phone1)
+# phone1.note = '我是phone1的note'
+# phone1.phone_book = [{'15900886745':'张三','18923468934':'李四'}]
+# # print(phone1.brand)
+# phone1.call()
+# print('------------------------')
+#
+#
+# phone2 = Phone()
+# phone2.note = '我是phone222222的note'
+# print(phone2)
+# phone2.call()
+
+
+# 函数 和 类里面定义的：方法
+
+# def func(name):
+#     print('----->',name)
+#
+# username = 'admin'
+# func(username)
+#
+# def func(names):
+#     for name in names:
+#         print(name)
+#
+#
+# name_list = ['aa','bb','cc']
+# func(name_list)
+
+
+# class Phone:
+#     def call(self):
+#         print('-------call')
+#
+# p = Phone()
+# p.call()  #p.call()  p是对象
+#
+# p1 = Phone()
+# p1.call()
