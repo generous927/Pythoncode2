@@ -4358,3 +4358,6 @@ def 方法名(self[,参数，参数])：
 #
 # p1 = Phone()
 # p1.call()
+
+
+aaaaaaaa=int()
